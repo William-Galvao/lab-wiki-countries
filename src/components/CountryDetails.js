@@ -10,34 +10,41 @@ export default function CountryDetails() {
         (currentCountry) => currentCountry.cca3 === params.cca3
     );
 
-    console.log(foundCountry);
+    // console.log(foundCountry);
+    // console.log(params);
 
-    return <div className="col-7">
-        <h1>{foundCountry.name.common}</h1>
-        <table className="table">
-            <thead></thead>
-            <tbody>
-                <tr>
-                    <td style={{ width: "30%" }}>Capital</td>
-                    <td>Paris</td>
-                </tr>
-                <tr>
-                    <td>Area</td>
-                    <td>
-                        551695 km
-                        <sup>2</sup>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Borders</td>
-                    <td>
-                        <ul>
-                            <li><Link to="/">teste</Link></li>
+    return (
+        <>
+            <div className='col-7'>
+                <h1>{foundCountry.name.common}</h1>
+                <table className="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td style={{ width: "30%" }}><strong>Capital</strong></td>
+                            {foundCountry.capital.map(capital => <td>{capital}</td>)}
 
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        </tr>
+                        <tr>
+                            <td><strong>Area</strong></td>
+                            <td>
+                                {foundCountry.area} km
+                                <sup>2</sup>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Borders</strong></td>
+                            <td>
+                                <ul className="list-unstyled">
+                                    {foundCountry.borders.map(border => <li><Link to={"/" + border}>
+                                        {countries.find(currentCountry => currentCountry.cca3 === border).name.common}
+                                    </Link></li>)}
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </>
+    )
 }
